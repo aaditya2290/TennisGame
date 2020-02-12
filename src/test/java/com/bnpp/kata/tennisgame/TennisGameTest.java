@@ -8,8 +8,8 @@ public class TennisGameTest {
 
 	@Test
 	public void shouldBeAbleToInstantiateTennisGame(){
-	TennisGame tennisGame = new TennisGame();
-	assertNotNull(tennisGame);
+		TennisGame tennisGame = new TennisGame();
+		assertNotNull(tennisGame);
 	}
 
 }
