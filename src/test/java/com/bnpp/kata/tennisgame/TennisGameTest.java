@@ -17,11 +17,6 @@ public class TennisGameTest {
 	}
 
 	@Test
-	public void shouldBeAbleToInstantiateTennisGame() {
-		assertNotNull(tennisGame);
-	}
-
-	@Test
 	public void scoreShouldBeLoveAllBeforeGameStarts() {
 		assertEquals(LOVE_ALL, tennisGame.getScore());
 	}
