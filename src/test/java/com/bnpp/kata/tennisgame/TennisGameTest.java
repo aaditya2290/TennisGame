@@ -20,4 +20,10 @@ public class TennisGameTest {
 	public void scoreShouldBeLoveAllBeforeGameStarts() {
 		assertEquals(LOVE_ALL, tennisGame.getScore());
 	}
+
+	@Test
+	public void scoreShouldBeFifteenLoveIfFirstPlayerWinsOnePoint(){
+		tennisGame.firstPlayerScores();
+		assertEquals("Fifteen Love",tennisGame.getScore());
+	}
 }
