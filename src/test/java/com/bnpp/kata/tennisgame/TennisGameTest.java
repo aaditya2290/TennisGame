@@ -31,9 +31,14 @@ public class TennisGameTest {
 
 	@Test
 	public void scoreShouldBeThirtyLoveIfFirstPlayerWinsTwoPoints(){
-		for (int pointCount=0; pointCount<2; pointCount++){
+		firstPlayerScoresMany(2);
+		assertEquals(THIRTY_LOVE,tennisGame.getScore());
+	}
+
+	public void firstPlayerScoresMany(int pointCount){
+		for (int pointCountIndex=0; pointCountIndex<pointCount; pointCountIndex++){
 			tennisGame.firstPlayerScores();
 		}
-		assertEquals(THIRTY_LOVE,tennisGame.getScore());
+
 	}
 }
