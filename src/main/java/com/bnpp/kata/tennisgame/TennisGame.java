@@ -9,6 +9,7 @@ public class TennisGame {
 	private static final String THIRTY = "Thirty";
 	private static final String FORTY = "Forty";
 	private static final String ALL = " All";
+	private static final String DEUCE = "Deuce";
 	private int firstPlayerScore=0;
 	private int secondPlayerScore=0;
 
@@ -21,7 +22,10 @@ public class TennisGame {
 		scoreLookUp.put(3,FORTY);
 
 		if (firstPlayerScore==secondPlayerScore){
-			return scoreLookUp.get(firstPlayerScore)+ALL;	
+			if (firstPlayerScore==3)
+				return DEUCE;
+			else
+				return scoreLookUp.get(firstPlayerScore)+ALL;	
 		} else {
 			return scoreLookUp.get(firstPlayerScore)+" "+scoreLookUp.get(secondPlayerScore);
 		}
