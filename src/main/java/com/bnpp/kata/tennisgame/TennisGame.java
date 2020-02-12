@@ -22,7 +22,7 @@ public class TennisGame {
 		scoreLookUp.put(3,FORTY);
 
 		if (firstPlayerScore==secondPlayerScore){
-			if (firstPlayerScore==3)
+			if (firstPlayerScore>=3)
 				return DEUCE;
 			else
 				return scoreLookUp.get(firstPlayerScore)+ALL;	

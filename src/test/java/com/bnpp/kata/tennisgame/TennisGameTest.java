@@ -73,7 +73,7 @@ public class TennisGameTest {
 	}
 
 	@Test
-	public void scoreShouldBeFiftenAllIfBothPlayerWinTwoPoints(){
+	public void scoreShouldBeThirtyAllIfBothPlayerWinTwoPoints(){
 		firstPlayerScoresMany(2);
 		secondPlayerScoresMany(2);
 		assertEquals(THIRTY_ALL,tennisGame.getScore());
@@ -83,6 +83,13 @@ public class TennisGameTest {
 	public void scoreShouldBeDeuceIfBothPlayerWinThreePoints(){
 		firstPlayerScoresMany(3);
 		secondPlayerScoresMany(3);
+		assertEquals(DEUCE,tennisGame.getScore());
+	}
+
+	@Test
+	public void scoreShouldBeDeuceIfBothPlayerWinSixPoints(){
+		firstPlayerScoresMany(6);
+		secondPlayerScoresMany(6);
 		assertEquals(DEUCE,tennisGame.getScore());
 	}
 
