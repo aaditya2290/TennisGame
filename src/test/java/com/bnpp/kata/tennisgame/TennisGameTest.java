@@ -8,6 +8,7 @@ import org.junit.Test;
 public class TennisGameTest {
 
 	private static final String LOVE_ALL = "Love All";
+	private static final String FIFTEEN_LOVE = "Fifteen Love";
 
 	private TennisGame tennisGame;
 
@@ -24,6 +25,6 @@ public class TennisGameTest {
 	@Test
 	public void scoreShouldBeFifteenLoveIfFirstPlayerWinsOnePoint(){
 		tennisGame.firstPlayerScores();
-		assertEquals("Fifteen Love",tennisGame.getScore());
+		assertEquals(FIFTEEN_LOVE,tennisGame.getScore());
 	}
 }
