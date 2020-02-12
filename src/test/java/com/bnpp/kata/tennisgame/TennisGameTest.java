@@ -12,6 +12,7 @@ public class TennisGameTest {
 	private static final String THIRTY_LOVE = "Thirty Love";
 	private static final String FORTY_LOVE = "Forty Love";
 	private static final String LOVE_FIFTEEN = "Love Fifteen";
+	private static final String LOVE_THIRTY = "Love Thirty";
 	private TennisGame tennisGame;
 
 	@Before
@@ -48,10 +49,21 @@ public class TennisGameTest {
 		assertEquals(LOVE_FIFTEEN,tennisGame.getScore());
 	}
 
+	@Test
+	public void scoreShouldBeLoveThirtyIfSecondPlayerWinsTwoPoints(){
+		secondPlayerScoresMany(2);
+		assertEquals(LOVE_THIRTY,tennisGame.getScore());
+	}
+
 	public void firstPlayerScoresMany(int pointCount){
 		for (int pointCountIndex=0; pointCountIndex<pointCount; pointCountIndex++){
 			tennisGame.firstPlayerScores();
 		}
+	}
 
+	public void secondPlayerScoresMany(int pointCount){
+		for (int pointCountIndex=0; pointCountIndex<pointCount; pointCountIndex++){
+			tennisGame.secondPlayerScores();
+		}
 	}
 }
