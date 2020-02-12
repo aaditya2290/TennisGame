@@ -12,4 +12,10 @@ public class TennisGameTest {
 		assertNotNull(tennisGame);
 	}
 
+	@Test
+	public void scoreShouldBeLoveAllBeforeGameStarts(){
+		TennisGame tennisGame = new TennisGame();
+		assertEquals("Love All",tennisGame.getScore());
+	}
+
 }
