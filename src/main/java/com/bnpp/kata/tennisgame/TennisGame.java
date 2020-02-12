@@ -10,6 +10,7 @@ public class TennisGame {
 	private static final String FORTY = "Forty";
 	private static final String LOVE_ALL = "Love All";
 	private static final String FIFTEEN_ALL = "Fifteen All";
+	private static final String THIRTY_ALL = "Thirty All";
 	private int firstPlayerScore=0;
 	private int secondPlayerScore=0;
 
@@ -24,6 +25,8 @@ public class TennisGame {
 		if (firstPlayerScore>0 || secondPlayerScore>0){
 			if (firstPlayerScore==1 && secondPlayerScore==1){
 				return FIFTEEN_ALL;
+			} else if (firstPlayerScore==2 && secondPlayerScore==2){
+				return THIRTY_ALL;
 			}
 			return scoreLookUp.get(firstPlayerScore)+" "+scoreLookUp.get(secondPlayerScore);
 		}
