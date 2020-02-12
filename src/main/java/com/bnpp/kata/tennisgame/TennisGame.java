@@ -21,13 +21,12 @@ public class TennisGame {
 		scoreLookUp.put(2,THIRTY);
 		scoreLookUp.put(3,FORTY);
 
-		if (firstPlayerScore==secondPlayerScore){
-			if (firstPlayerScore>=3)
-				return DEUCE;
-			else
-				return scoreLookUp.get(firstPlayerScore)+ALL;	
+		if (isDeuce())
+			return DEUCE;
+		else if (firstPlayerScore!=secondPlayerScore){
+			return scoreLookUp.get(firstPlayerScore)+" "+scoreLookUp.get(secondPlayerScore);		
 		} else {
-			return scoreLookUp.get(firstPlayerScore)+" "+scoreLookUp.get(secondPlayerScore);
+			return scoreLookUp.get(firstPlayerScore)+ALL;	
 		}
 	}
 
@@ -37,5 +36,9 @@ public class TennisGame {
 
 	public void secondPlayerScores() {
 		secondPlayerScore++;
+	}
+
+	public boolean isDeuce(){
+		return (firstPlayerScore==secondPlayerScore && firstPlayerScore>=3);
 	}
 }
