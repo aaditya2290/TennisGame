@@ -4,11 +4,14 @@ public class TennisGame {
 
 	private static final String LOVE_ALL = "Love All";
 	private static final String FIFTEEN_LOVE = "Fifteen Love";
+	private static final String THIRTY_LOVE = "Thirty Love";
 	private int firstPlayerScore=0;
 
 	public String getScore() {
 		if (firstPlayerScore==1){
 			return FIFTEEN_LOVE;
+		} else if (firstPlayerScore==2){
+			return THIRTY_LOVE;
 		}
 		return LOVE_ALL;
 	}

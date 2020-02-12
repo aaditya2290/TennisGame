@@ -9,6 +9,7 @@ public class TennisGameTest {
 
 	private static final String LOVE_ALL = "Love All";
 	private static final String FIFTEEN_LOVE = "Fifteen Love";
+	private static final String THIRTY_LOVE = "Thirty Love";
 
 	private TennisGame tennisGame;
 
@@ -26,5 +27,13 @@ public class TennisGameTest {
 	public void scoreShouldBeFifteenLoveIfFirstPlayerWinsOnePoint(){
 		tennisGame.firstPlayerScores();
 		assertEquals(FIFTEEN_LOVE,tennisGame.getScore());
+	}
+
+	@Test
+	public void scoreShouldBeThirtyLoveIfFirstPlayerWinsTwoPoints(){
+		for (int pointCount=0; pointCount<2; pointCount++){
+			tennisGame.firstPlayerScores();
+		}
+		assertEquals(THIRTY_LOVE,tennisGame.getScore());
 	}
 }
