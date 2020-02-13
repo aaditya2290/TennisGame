@@ -11,6 +11,7 @@ public class TennisGame {
 	private static final String ALL = " All";
 	private static final String DEUCE = "Deuce";
 	private static final String ADVANTAGE = "Advantage ";
+	private static final String WINS = " wins";
 	private int firstPlayerScore = 0;
 	private int secondPlayerScore = 0;
 	String firstPlayerName;
@@ -31,7 +32,7 @@ public class TennisGame {
 		scoreLookUp.put(3, FORTY);
 
 		if (isFirstPlayerWins()) {
-			return this.getFirstPlayerName() + " wins";
+			return this.getFirstPlayerName() + WINS;
 		} else if (isAdvantageFirstPlayer()) {
 			return ADVANTAGE + this.getFirstPlayerName();
 		} else if (isAdvantageSecondPlayer()) {
