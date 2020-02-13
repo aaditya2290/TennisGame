@@ -146,6 +146,13 @@ public class TennisGameTest {
 		assertEquals(PLAYER_SCORES_ARE_INVALID, tennisGame.getScore());
 	}
 
+	@Test
+	public void scoreShouldPlayerScoresAreInvalidIfFirstPlayerWins2PointsAndSecondPlayerWins12Points() {
+		firstPlayerScoresMany(2);
+		secondPlayerScoresMany(12);
+		assertEquals(PLAYER_SCORES_ARE_INVALID, tennisGame.getScore());
+	}
+
 	public void firstPlayerScoresMany(int pointCount) {
 		for (int pointCountIndex = 0; pointCountIndex < pointCount; pointCountIndex++) {
 			tennisGame.firstPlayerScores();
