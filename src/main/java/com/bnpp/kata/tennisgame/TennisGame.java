@@ -12,6 +12,8 @@ public class TennisGame {
 	private static final String DEUCE = "Deuce";
 	private static final String ADVANTAGE = "Advantage ";
 	private static final String WINS = " wins";
+	private static final String PLAYER_SCORES_ARE_INVALID = "Player scores are invalid";
+
 	private int firstPlayerScore = 0;
 	private int secondPlayerScore = 0;
 	String firstPlayerName;
@@ -31,7 +33,10 @@ public class TennisGame {
 		scoreLookUp.put(2, THIRTY);
 		scoreLookUp.put(3, FORTY);
 
-		if (isFirstPlayerWins()) {
+		if ((firstPlayerScore - secondPlayerScore > 2 && firstPlayerScore > 5)
+				|| (secondPlayerScore - firstPlayerScore > 2 && secondPlayerScore > 5)) {
+			return PLAYER_SCORES_ARE_INVALID;
+		} else if (isFirstPlayerWins()) {
 			return this.getFirstPlayerName() + WINS;
 		} else if (isSecondPlayerWins()) {
 			return this.getSecondPlayerName() + WINS;
@@ -83,4 +88,5 @@ public class TennisGame {
 	String getSecondPlayerName() {
 		return secondPlayerName;
 	}
+
 }

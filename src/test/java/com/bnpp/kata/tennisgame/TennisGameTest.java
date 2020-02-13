@@ -19,6 +19,8 @@ public class TennisGameTest {
 	private static final String DEUCE = "Deuce";
 	private static final String ADVANTAGE = "Advantage ";
 	private static final String WINS = " wins";
+	private static final String PLAYER_SCORES_ARE_INVALID = "Player scores are invalid";
+
 	private TennisGame tennisGame;
 
 	@Before
@@ -135,6 +137,13 @@ public class TennisGameTest {
 		firstPlayerScoresMany(5);
 		secondPlayerScoresMany(7);
 		assertEquals(tennisGame.getSecondPlayerName() + WINS, tennisGame.getScore());
+	}
+
+	@Test
+	public void scoreShouldPlayerScoresAreInvalidIfFirstPlayerWins10PointsAndSecondPlayerWins2Points() {
+		firstPlayerScoresMany(10);
+		secondPlayerScoresMany(2);
+		assertEquals(PLAYER_SCORES_ARE_INVALID, tennisGame.getScore());
 	}
 
 	public void firstPlayerScoresMany(int pointCount) {
