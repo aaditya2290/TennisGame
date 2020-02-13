@@ -123,6 +123,13 @@ public class TennisGameTest {
 		assertEquals(tennisGame.getFirstPlayerName() + WINS, tennisGame.getScore());
 	}
 
+	@Test
+	public void scoreShouldBeFirstPlayerWinsIfFirstPlayerWins4PointsAndSecondPlayerWins1Point() {
+		firstPlayerScoresMany(4);
+		secondPlayerScoresMany(1);
+		assertEquals(tennisGame.getFirstPlayerName() + WINS, tennisGame.getScore());
+	}
+
 	public void firstPlayerScoresMany(int pointCount) {
 		for (int pointCountIndex = 0; pointCountIndex < pointCount; pointCountIndex++) {
 			tennisGame.firstPlayerScores();
