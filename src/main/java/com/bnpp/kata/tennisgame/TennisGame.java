@@ -32,7 +32,7 @@ public class TennisGame {
 
 		if (isAdvantageFirstPlayer())
 			return ADVANTAGE + this.getFirstPlayerName();
-		if (secondPlayerScore - firstPlayerScore == 1 && firstPlayerScore >= 3)
+		if (isAdvantageSecondPlayer())
 			return ADVANTAGE + this.getSecondPlayerName();
 		else if (isDeuce())
 			return DEUCE;
@@ -57,6 +57,10 @@ public class TennisGame {
 
 	boolean isAdvantageFirstPlayer() {
 		return firstPlayerScore - secondPlayerScore == 1 && secondPlayerScore >= 3;
+	}
+
+	boolean isAdvantageSecondPlayer() {
+		return secondPlayerScore - firstPlayerScore == 1 && firstPlayerScore >= 3;
 	}
 
 	String getFirstPlayerName() {
