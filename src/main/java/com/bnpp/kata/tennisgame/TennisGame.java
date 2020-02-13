@@ -33,8 +33,7 @@ public class TennisGame {
 		scoreLookUp.put(2, THIRTY);
 		scoreLookUp.put(3, FORTY);
 
-		if ((firstPlayerScore - secondPlayerScore > 2 && firstPlayerScore > 5)
-				|| (secondPlayerScore - firstPlayerScore > 2 && secondPlayerScore > 5)) {
+		if (isInvalidScores()) {
 			return PLAYER_SCORES_ARE_INVALID;
 		} else if (isFirstPlayerWins()) {
 			return this.getFirstPlayerName() + WINS;
@@ -79,6 +78,11 @@ public class TennisGame {
 
 	boolean isSecondPlayerWins() {
 		return secondPlayerScore - firstPlayerScore >= 2 && secondPlayerScore > 3;
+	}
+
+	boolean isInvalidScores() {
+		return (firstPlayerScore - secondPlayerScore > 2 && firstPlayerScore > 5)
+				|| (secondPlayerScore - firstPlayerScore > 2 && secondPlayerScore > 5);
 	}
 
 	String getFirstPlayerName() {
