@@ -33,6 +33,8 @@ public class TennisGame {
 
 		if (isFirstPlayerWins()) {
 			return this.getFirstPlayerName() + WINS;
+		} else if (secondPlayerScore - firstPlayerScore >= 2 && firstPlayerScore > 3) {
+			return this.getSecondPlayerName() + WINS;
 		} else if (isAdvantageFirstPlayer()) {
 			return ADVANTAGE + this.getFirstPlayerName();
 		} else if (isAdvantageSecondPlayer()) {
