@@ -32,6 +32,8 @@ public class TennisGame {
 
 		if (isAdvantageFirstPlayer())
 			return ADVANTAGE + this.getFirstPlayerName();
+		if (secondPlayerScore - firstPlayerScore == 1 && firstPlayerScore >= 3)
+			return ADVANTAGE + this.getSecondPlayerName();
 		else if (isDeuce())
 			return DEUCE;
 		else if (firstPlayerScore != secondPlayerScore) {
