@@ -17,11 +17,12 @@ public class TennisGameTest {
 	private static final String FIFTEEN_ALL = "Fifteen All";
 	private static final String THIRTY_ALL = "Thirty All";
 	private static final String DEUCE = "Deuce";
+	private static final String ADVANTAGE = "Advantage ";
 	private TennisGame tennisGame;
 
 	@Before
 	public void init() {
-		tennisGame = new TennisGame();
+		tennisGame = new TennisGame("First Player", "Second Player");
 	}
 
 	@Test
@@ -30,77 +31,84 @@ public class TennisGameTest {
 	}
 
 	@Test
-	public void scoreShouldBeFifteenLoveIfFirstPlayerWinsOnePoint(){
+	public void scoreShouldBeFifteenLoveIfFirstPlayerWinsOnePoint() {
 		tennisGame.firstPlayerScores();
-		assertEquals(FIFTEEN_LOVE,tennisGame.getScore());
+		assertEquals(FIFTEEN_LOVE, tennisGame.getScore());
 	}
 
 	@Test
-	public void scoreShouldBeThirtyLoveIfFirstPlayerWinsTwoPoints(){
+	public void scoreShouldBeThirtyLoveIfFirstPlayerWinsTwoPoints() {
 		firstPlayerScoresMany(2);
-		assertEquals(THIRTY_LOVE,tennisGame.getScore());
+		assertEquals(THIRTY_LOVE, tennisGame.getScore());
 	}
 
 	@Test
-	public void scoreShouldBeFortyLoveIfFirstPlayerWinsThreePoints(){
+	public void scoreShouldBeFortyLoveIfFirstPlayerWinsThreePoints() {
 		firstPlayerScoresMany(3);
-		assertEquals(FORTY_LOVE,tennisGame.getScore());
+		assertEquals(FORTY_LOVE, tennisGame.getScore());
 	}
 
 	@Test
-	public void scoreShouldBeLoveFifteenIfSecondPlayerWinsOnePoint(){
+	public void scoreShouldBeLoveFifteenIfSecondPlayerWinsOnePoint() {
 		tennisGame.secondPlayerScores();
-		assertEquals(LOVE_FIFTEEN,tennisGame.getScore());
+		assertEquals(LOVE_FIFTEEN, tennisGame.getScore());
 	}
 
 	@Test
-	public void scoreShouldBeLoveThirtyIfSecondPlayerWinsTwoPoints(){
+	public void scoreShouldBeLoveThirtyIfSecondPlayerWinsTwoPoints() {
 		secondPlayerScoresMany(2);
-		assertEquals(LOVE_THIRTY,tennisGame.getScore());
+		assertEquals(LOVE_THIRTY, tennisGame.getScore());
 	}
 
 	@Test
-	public void scoreShouldBeLoveFortyIfSecondPlayerWinsThreePoints(){
+	public void scoreShouldBeLoveFortyIfSecondPlayerWinsThreePoints() {
 		secondPlayerScoresMany(3);
-		assertEquals(LOVE_FORTY,tennisGame.getScore());
+		assertEquals(LOVE_FORTY, tennisGame.getScore());
 	}
 
 	@Test
-	public void scoreShouldBeFiftenAllIfBothPlayerWinOnePoint(){
+	public void scoreShouldBeFiftenAllIfBothPlayerWinOnePoint() {
 		tennisGame.firstPlayerScores();
 		tennisGame.secondPlayerScores();
-		assertEquals(FIFTEEN_ALL,tennisGame.getScore());
+		assertEquals(FIFTEEN_ALL, tennisGame.getScore());
 	}
 
 	@Test
-	public void scoreShouldBeThirtyAllIfBothPlayerWinTwoPoints(){
+	public void scoreShouldBeThirtyAllIfBothPlayerWinTwoPoints() {
 		firstPlayerScoresMany(2);
 		secondPlayerScoresMany(2);
-		assertEquals(THIRTY_ALL,tennisGame.getScore());
+		assertEquals(THIRTY_ALL, tennisGame.getScore());
 	}
 
 	@Test
-	public void scoreShouldBeDeuceIfBothPlayerWinThreePoints(){
+	public void scoreShouldBeDeuceIfBothPlayerWinThreePoints() {
 		firstPlayerScoresMany(3);
 		secondPlayerScoresMany(3);
-		assertEquals(DEUCE,tennisGame.getScore());
+		assertEquals(DEUCE, tennisGame.getScore());
 	}
 
 	@Test
-	public void scoreShouldBeDeuceIfBothPlayerWinSixPoints(){
+	public void scoreShouldBeDeuceIfBothPlayerWinSixPoints() {
 		firstPlayerScoresMany(6);
 		secondPlayerScoresMany(6);
-		assertEquals(DEUCE,tennisGame.getScore());
+		assertEquals(DEUCE, tennisGame.getScore());
 	}
 
-	public void firstPlayerScoresMany(int pointCount){
-		for (int pointCountIndex=0; pointCountIndex<pointCount; pointCountIndex++){
+	@Test
+	public void scoreShouldBeAdvantageFirstPlayerIfFirstPlayerWins4PointsAndSecondPlayerWins3Points() {
+		firstPlayerScoresMany(4);
+		secondPlayerScoresMany(3);
+		assertEquals(ADVANTAGE + tennisGame.getFirstPlayerName(), tennisGame.getScore());
+	}
+
+	public void firstPlayerScoresMany(int pointCount) {
+		for (int pointCountIndex = 0; pointCountIndex < pointCount; pointCountIndex++) {
 			tennisGame.firstPlayerScores();
 		}
 	}
 
-	public void secondPlayerScoresMany(int pointCount){
-		for (int pointCountIndex=0; pointCountIndex<pointCount; pointCountIndex++){
+	public void secondPlayerScoresMany(int pointCount) {
+		for (int pointCountIndex = 0; pointCountIndex < pointCount; pointCountIndex++) {
 			tennisGame.secondPlayerScores();
 		}
 	}

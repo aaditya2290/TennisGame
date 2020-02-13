@@ -10,23 +10,34 @@ public class TennisGame {
 	private static final String FORTY = "Forty";
 	private static final String ALL = " All";
 	private static final String DEUCE = "Deuce";
-	private int firstPlayerScore=0;
-	private int secondPlayerScore=0;
+	private static final String ADVANTAGE = "Advantage ";
+	private int firstPlayerScore = 0;
+	private int secondPlayerScore = 0;
+	String firstPlayerName;
+	String secondPlayerName;
+
+	TennisGame(String firstPlayerName, String secondPlayerName) {
+		super();
+		this.firstPlayerName = firstPlayerName;
+		this.secondPlayerName = secondPlayerName;
+	}
 
 	public String getScore() {
 
-		HashMap<Integer,String> scoreLookUp=new HashMap<Integer,String>();
-		scoreLookUp.put(0,LOVE);
-		scoreLookUp.put(1,FIFTEEN);
-		scoreLookUp.put(2,THIRTY);
-		scoreLookUp.put(3,FORTY);
+		HashMap<Integer, String> scoreLookUp = new HashMap<Integer, String>();
+		scoreLookUp.put(0, LOVE);
+		scoreLookUp.put(1, FIFTEEN);
+		scoreLookUp.put(2, THIRTY);
+		scoreLookUp.put(3, FORTY);
 
-		if (isDeuce())
+		if (firstPlayerScore - secondPlayerScore == 1 && secondPlayerScore >= 3)
+			return ADVANTAGE + this.getFirstPlayerName();
+		else if (isDeuce())
 			return DEUCE;
-		else if (firstPlayerScore!=secondPlayerScore){
-			return scoreLookUp.get(firstPlayerScore)+" "+scoreLookUp.get(secondPlayerScore);		
+		else if (firstPlayerScore != secondPlayerScore) {
+			return scoreLookUp.get(firstPlayerScore) + " " + scoreLookUp.get(secondPlayerScore);
 		} else {
-			return scoreLookUp.get(firstPlayerScore)+ALL;	
+			return scoreLookUp.get(firstPlayerScore) + ALL;
 		}
 	}
 
@@ -38,7 +49,15 @@ public class TennisGame {
 		secondPlayerScore++;
 	}
 
-	public boolean isDeuce(){
-		return (firstPlayerScore==secondPlayerScore && firstPlayerScore>=3);
+	public boolean isDeuce() {
+		return (firstPlayerScore == secondPlayerScore && firstPlayerScore >= 3);
+	}
+
+	String getFirstPlayerName() {
+		return firstPlayerName;
+	}
+
+	String getSecondPlayerName() {
+		return secondPlayerName;
 	}
 }
