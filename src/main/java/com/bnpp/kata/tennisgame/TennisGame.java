@@ -22,7 +22,7 @@ public class TennisGame {
 		this.secondPlayerName = secondPlayerName;
 	}
 
-	public String getScore() {
+	String getScore() {
 
 		HashMap<Integer, String> scoreLookUp = new HashMap<Integer, String>();
 		scoreLookUp.put(0, LOVE);
@@ -30,7 +30,7 @@ public class TennisGame {
 		scoreLookUp.put(2, THIRTY);
 		scoreLookUp.put(3, FORTY);
 
-		if (firstPlayerScore - secondPlayerScore == 1 && secondPlayerScore >= 3)
+		if (isAdvantageFirstPlayer())
 			return ADVANTAGE + this.getFirstPlayerName();
 		else if (isDeuce())
 			return DEUCE;
@@ -41,16 +41,20 @@ public class TennisGame {
 		}
 	}
 
-	public void firstPlayerScores() {
+	void firstPlayerScores() {
 		firstPlayerScore++;
 	}
 
-	public void secondPlayerScores() {
+	void secondPlayerScores() {
 		secondPlayerScore++;
 	}
 
-	public boolean isDeuce() {
+	boolean isDeuce() {
 		return (firstPlayerScore == secondPlayerScore && firstPlayerScore >= 3);
+	}
+
+	boolean isAdvantageFirstPlayer() {
+		return firstPlayerScore - secondPlayerScore == 1 && secondPlayerScore >= 3;
 	}
 
 	String getFirstPlayerName() {
