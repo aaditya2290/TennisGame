@@ -18,6 +18,7 @@ public class TennisGameTest {
 	private static final String THIRTY_ALL = "Thirty All";
 	private static final String DEUCE = "Deuce";
 	private static final String ADVANTAGE = "Advantage ";
+	private static final String WINS = " wins";
 	private TennisGame tennisGame;
 
 	@Before
@@ -113,6 +114,13 @@ public class TennisGameTest {
 		firstPlayerScoresMany(8);
 		secondPlayerScoresMany(9);
 		assertEquals(ADVANTAGE + tennisGame.getSecondPlayerName(), tennisGame.getScore());
+	}
+
+	@Test
+	public void scoreShouldBeFirstPlayerWinsIfFirstPlayerWins5PointsAndSecondPlayerWins3Points() {
+		firstPlayerScoresMany(5);
+		secondPlayerScoresMany(3);
+		assertEquals(tennisGame.getFirstPlayerName() + WINS, tennisGame.getScore());
 	}
 
 	public void firstPlayerScoresMany(int pointCount) {

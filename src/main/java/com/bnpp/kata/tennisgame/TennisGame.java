@@ -30,13 +30,15 @@ public class TennisGame {
 		scoreLookUp.put(2, THIRTY);
 		scoreLookUp.put(3, FORTY);
 
-		if (isAdvantageFirstPlayer())
+		if (firstPlayerScore - secondPlayerScore >= 2 && firstPlayerScore > 3) {
+			return this.getFirstPlayerName() + " wins";
+		} else if (isAdvantageFirstPlayer()) {
 			return ADVANTAGE + this.getFirstPlayerName();
-		if (isAdvantageSecondPlayer())
+		} else if (isAdvantageSecondPlayer()) {
 			return ADVANTAGE + this.getSecondPlayerName();
-		else if (isDeuce())
+		} else if (isDeuce()) {
 			return DEUCE;
-		else if (firstPlayerScore != secondPlayerScore) {
+		} else if (firstPlayerScore != secondPlayerScore) {
 			return scoreLookUp.get(firstPlayerScore) + " " + scoreLookUp.get(secondPlayerScore);
 		} else {
 			return scoreLookUp.get(firstPlayerScore) + ALL;
