@@ -5,17 +5,17 @@ import java.util.logging.Logger;
 
 public class TennisGame {
 
-	private final static Logger logger = Logger.getLogger(TennisGame.class.getName());
+	private final static Logger logger = Logger.getLogger(TennisGame.class
+			.getName());
 
-	private static final String LOVE = "Love";
-	private static final String FIFTEEN = "Fifteen";
-	private static final String THIRTY = "Thirty";
-	private static final String FORTY = "Forty";
-	private static final String ALL = " All";
-	private static final String DEUCE = "Deuce";
-	private static final String ADVANTAGE = "Advantage ";
-	private static final String WINS = " wins";
-	private static final String PLAYER_SCORES_ARE_INVALID = "Player scores are invalid";
+	public enum GameScore {
+		LOVE, FIFTEEN, THIRTY, FORTY, DEUCE;
+	}
+
+	public static final String ALL = " ALL";
+	public static final String ADVANTAGE = "ADVANTAGE ";
+	public static final String WINS = " WINS";
+	public static final String PLAYER_SCORES_ARE_INVALID = "PLAYER SCORES ARE INVALID";
 
 	private int firstPlayerScore = 0;
 	private int secondPlayerScore = 0;
@@ -30,11 +30,11 @@ public class TennisGame {
 
 	String getScore() {
 
-		HashMap<Integer, String> scoreLookUp = new HashMap<Integer, String>();
-		scoreLookUp.put(0, LOVE);
-		scoreLookUp.put(1, FIFTEEN);
-		scoreLookUp.put(2, THIRTY);
-		scoreLookUp.put(3, FORTY);
+		HashMap<Integer, GameScore> scoreLookUp = new HashMap<Integer, GameScore>();
+		scoreLookUp.put(0, GameScore.LOVE);
+		scoreLookUp.put(1, GameScore.FIFTEEN);
+		scoreLookUp.put(2, GameScore.THIRTY);
+		scoreLookUp.put(3, GameScore.FORTY);
 
 		if (isInvalidScores()) {
 			return PLAYER_SCORES_ARE_INVALID;
@@ -47,9 +47,10 @@ public class TennisGame {
 		} else if (isAdvantageSecondPlayer()) {
 			return ADVANTAGE + this.getSecondPlayerName();
 		} else if (isDeuce()) {
-			return DEUCE;
+			return GameScore.DEUCE.toString();
 		} else if (firstPlayerScore != secondPlayerScore) {
-			return scoreLookUp.get(firstPlayerScore) + " " + scoreLookUp.get(secondPlayerScore);
+			return scoreLookUp.get(firstPlayerScore) + " "
+					+ scoreLookUp.get(secondPlayerScore);
 		} else {
 			return scoreLookUp.get(firstPlayerScore) + ALL;
 		}
@@ -68,19 +69,23 @@ public class TennisGame {
 	}
 
 	boolean isAdvantageFirstPlayer() {
-		return firstPlayerScore - secondPlayerScore == 1 && secondPlayerScore >= 3;
+		return firstPlayerScore - secondPlayerScore == 1
+				&& secondPlayerScore >= 3;
 	}
 
 	boolean isAdvantageSecondPlayer() {
-		return secondPlayerScore - firstPlayerScore == 1 && firstPlayerScore >= 3;
+		return secondPlayerScore - firstPlayerScore == 1
+				&& firstPlayerScore >= 3;
 	}
 
 	boolean isFirstPlayerWins() {
-		return firstPlayerScore - secondPlayerScore >= 2 && firstPlayerScore > 3;
+		return firstPlayerScore - secondPlayerScore >= 2
+				&& firstPlayerScore > 3;
 	}
 
 	boolean isSecondPlayerWins() {
-		return secondPlayerScore - firstPlayerScore >= 2 && secondPlayerScore > 3;
+		return secondPlayerScore - firstPlayerScore >= 2
+				&& secondPlayerScore > 3;
 	}
 
 	boolean isInvalidScores() {
@@ -107,11 +112,13 @@ public class TennisGame {
 			int firstPlayerScore = Integer.parseInt(args[1]);
 			int secondPlayerScore = Integer.parseInt(args[3]);
 
-			for (int firstPlayerScoreIndex = 0; firstPlayerScoreIndex < firstPlayerScore; firstPlayerScoreIndex++)
+			for (int firstPlayerScoreIndex = 0; firstPlayerScoreIndex < firstPlayerScore; firstPlayerScoreIndex++) {
 				game.firstPlayerScores();
+			}
 
-			for (int secondPlayerScoreIndex = 0; secondPlayerScoreIndex < secondPlayerScore; secondPlayerScoreIndex++)
+			for (int secondPlayerScoreIndex = 0; secondPlayerScoreIndex < secondPlayerScore; secondPlayerScoreIndex++) {
 				game.secondPlayerScores();
+			}
 
 			logger.info(game.getScore());
 		}
