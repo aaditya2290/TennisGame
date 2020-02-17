@@ -19,16 +19,16 @@ public class TennisGame {
 
 	private int firstPlayerScore = 0;
 	private int secondPlayerScore = 0;
-	String firstPlayerName;
-	String secondPlayerName;
+	private String firstPlayerName;
+	private String secondPlayerName;
 
-	TennisGame(String firstPlayerName, String secondPlayerName) {
+	public TennisGame(String firstPlayerName, String secondPlayerName) {
 		super();
 		this.firstPlayerName = firstPlayerName;
 		this.secondPlayerName = secondPlayerName;
 	}
 
-	String getScore() {
+	public String getScore() {
 
 		HashMap<Integer, GameScore> scoreLookUp = new HashMap<Integer, GameScore>();
 		scoreLookUp.put(0, GameScore.LOVE);
@@ -56,49 +56,101 @@ public class TennisGame {
 		}
 	}
 
-	void firstPlayerScores() {
+	public void firstPlayerScores() {
 		firstPlayerScore++;
 	}
 
-	void secondPlayerScores() {
+	public void secondPlayerScores() {
 		secondPlayerScore++;
 	}
 
-	boolean isDeuce() {
-		return (firstPlayerScore == secondPlayerScore && firstPlayerScore >= 3);
-	}
-
-	boolean isAdvantageFirstPlayer() {
-		return firstPlayerScore - secondPlayerScore == 1
-				&& secondPlayerScore >= 3;
-	}
-
-	boolean isAdvantageSecondPlayer() {
-		return secondPlayerScore - firstPlayerScore == 1
-				&& firstPlayerScore >= 3;
-	}
-
-	boolean isFirstPlayerWins() {
-		return firstPlayerScore - secondPlayerScore >= 2
-				&& firstPlayerScore > 3;
-	}
-
-	boolean isSecondPlayerWins() {
-		return secondPlayerScore - firstPlayerScore >= 2
-				&& secondPlayerScore > 3;
-	}
-
-	boolean isInvalidScores() {
-		return (firstPlayerScore - secondPlayerScore > 2 && firstPlayerScore > 5)
-				|| (secondPlayerScore - firstPlayerScore > 2 && secondPlayerScore > 5);
-	}
-
-	String getFirstPlayerName() {
+	public String getFirstPlayerName() {
 		return firstPlayerName;
 	}
 
-	String getSecondPlayerName() {
+	public String getSecondPlayerName() {
 		return secondPlayerName;
+	}
+
+	private boolean isDeuce() {
+		return (isPlayerScoresEqual() && isFirstPlayerScoreExceedsTwoPoints());
+	}
+
+	private boolean isPlayerScoresEqual() {
+		return firstPlayerScore == secondPlayerScore;
+	}
+
+	private boolean isFirstPlayerScoreExceedsTwoPoints() {
+		return firstPlayerScore > 2;
+	}
+
+	private boolean isAdvantageFirstPlayer() {
+		return isFirstPlayerLeadsByOnePoint()
+				&& isSecondPlayerScoreExceedsTwoPoints();
+	}
+
+	private boolean isFirstPlayerLeadsByOnePoint() {
+		return firstPlayerScore - secondPlayerScore == 1;
+	}
+
+	private boolean isSecondPlayerScoreExceedsTwoPoints() {
+		return secondPlayerScore > 2;
+	}
+
+	private boolean isAdvantageSecondPlayer() {
+		return isSecondPlayerLeadsByOnePoint()
+				&& isFirstPlayerScoreExceedsTwoPoints();
+	}
+
+	private boolean isSecondPlayerLeadsByOnePoint() {
+		return secondPlayerScore - firstPlayerScore == 1;
+	}
+
+	private boolean isFirstPlayerWins() {
+		return isFirstPlayerLeadsByTwoOrMorePoints()
+				&& isFirstPlayerScoreExceedsThreePoints();
+	}
+
+	private boolean isFirstPlayerLeadsByTwoOrMorePoints() {
+		return firstPlayerScore - secondPlayerScore >= 2;
+	}
+
+	private boolean isFirstPlayerScoreExceedsThreePoints() {
+		return firstPlayerScore > 3;
+	}
+
+	private boolean isSecondPlayerWins() {
+		return isSecondPlayerLeadsByTwoOrMorePoints()
+				&& isSecondPlayerScoreExceedsThreePoints();
+	}
+
+	private boolean isSecondPlayerScoreExceedsThreePoints() {
+		return secondPlayerScore > 3;
+	}
+
+	private boolean isSecondPlayerLeadsByTwoOrMorePoints() {
+		return secondPlayerScore - firstPlayerScore >= 2;
+	}
+
+	private boolean isInvalidScores() {
+		return (isFirstPlayerLeadsByMoreThanTwoPoints() && isFirstPlayerScoreExceedsFivePoints())
+				|| (isSecondPlayerLeadsByMoreThanTwoPoints() && isSecondPlayerScoreExceedsFivePoints());
+	}
+
+	private boolean isFirstPlayerLeadsByMoreThanTwoPoints() {
+		return firstPlayerScore - secondPlayerScore > 2;
+	}
+
+	private boolean isFirstPlayerScoreExceedsFivePoints() {
+		return firstPlayerScore > 5;
+	}
+
+	private boolean isSecondPlayerLeadsByMoreThanTwoPoints() {
+		return secondPlayerScore - firstPlayerScore > 2;
+	}
+
+	private boolean isSecondPlayerScoreExceedsFivePoints() {
+		return secondPlayerScore > 5;
 	}
 
 	public static void main(String args[]) {
