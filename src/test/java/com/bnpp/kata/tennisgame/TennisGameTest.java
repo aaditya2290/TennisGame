@@ -71,38 +71,9 @@ public class TennisGameTest {
 	}
 
 	@Test
-	public void scoreShouldBeThirtyAllIfBothPlayerWinTwoPoints() {
-		tennisGame.setFirstPlayerScore(2);
-		tennisGame.setSecondPlayerScore(2);
-		assertEquals(GameScore.THIRTY + TennisGame.ALL, tennisGame.getScore());
-	}
-
-	@Test
-	public void scoreShouldBeDeuceIfBothPlayerWinThreePoints() {
-		tennisGame.setFirstPlayerScore(3);
-		tennisGame.setSecondPlayerScore(3);
-		assertEquals(GameScore.DEUCE.toString(), tennisGame.getScore());
-	}
-
-	@Test
-	public void scoreShouldBeDeuceIfBothPlayerWinSixPoints() {
-		tennisGame.setFirstPlayerScore(6);
-		tennisGame.setSecondPlayerScore(6);
-		assertEquals(GameScore.DEUCE.toString(), tennisGame.getScore());
-	}
-
-	@Test
 	public void scoreShouldBeAdvantageFirstPlayerIfFirstPlayerWins4PointsAndSecondPlayerWins3Points() {
 		tennisGame.setFirstPlayerScore(4);
 		tennisGame.setSecondPlayerScore(3);
-		assertEquals(TennisGame.ADVANTAGE + tennisGame.getFirstPlayerName(),
-				tennisGame.getScore());
-	}
-
-	@Test
-	public void scoreShouldBeAdvantageFirstPlayerIfFirstPlayerWins9PointsAndSecondPlayerWins8Points() {
-		tennisGame.setFirstPlayerScore(9);
-		tennisGame.setSecondPlayerScore(8);
 		assertEquals(TennisGame.ADVANTAGE + tennisGame.getFirstPlayerName(),
 				tennisGame.getScore());
 	}
@@ -124,15 +95,7 @@ public class TennisGameTest {
 	}
 
 	@Test
-	public void scoreShouldBeFirstPlayerWinsIfFirstPlayerWins4PointsAndSecondPlayerWins1Point() {
-		tennisGame.setFirstPlayerScore(4);
-		tennisGame.setSecondPlayerScore(1);
-		assertEquals(tennisGame.getFirstPlayerName() + TennisGame.WINS,
-				tennisGame.getScore());
-	}
-
-	@Test
-	public void scoreShouldBeSecondPlayerWinsIfFirstPlayerWins5PointsAndSecondPlayerWins7Point() {
+	public void scoreShouldBeSecondPlayerWinsIfFirstPlayerWins5PointsAndSecondPlayerWins7Points() {
 		tennisGame.setFirstPlayerScore(5);
 		tennisGame.setSecondPlayerScore(7);
 		assertEquals(tennisGame.getSecondPlayerName() + TennisGame.WINS,
@@ -140,7 +103,7 @@ public class TennisGameTest {
 	}
 
 	@Test
-	public void scoreShouldPlayerScoresAreInvalidIfFirstPlayerWins10PointsAndSecondPlayerWins2Points() {
+	public void scoreShouldBePlayerScoresAreInvalidIfFirstPlayerWins10PointsAndSecondPlayerWins2Points() {
 		tennisGame.setFirstPlayerScore(10);
 		tennisGame.setSecondPlayerScore(2);
 		assertEquals(TennisGame.PLAYER_SCORES_ARE_INVALID,
@@ -148,7 +111,7 @@ public class TennisGameTest {
 	}
 
 	@Test
-	public void scoreShouldPlayerScoresAreInvalidIfFirstPlayerWins2PointsAndSecondPlayerWins12Points() {
+	public void scoreShouldBePlayerScoresAreInvalidIfFirstPlayerWins2PointsAndSecondPlayerWins12Points() {
 		tennisGame.setFirstPlayerScore(2);
 		tennisGame.setSecondPlayerScore(12);
 		assertEquals(TennisGame.PLAYER_SCORES_ARE_INVALID,
