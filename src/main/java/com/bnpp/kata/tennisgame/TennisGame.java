@@ -17,8 +17,8 @@ public class TennisGame {
 	public static final String WINS = " WINS";
 	public static final String PLAYER_SCORES_ARE_INVALID = "PLAYER SCORES ARE INVALID";
 
-	private int firstPlayerScore = 0;
-	private int secondPlayerScore = 0;
+	private int firstPlayerScore;
+	private int secondPlayerScore;
 	private String firstPlayerName;
 	private String secondPlayerName;
 
@@ -56,20 +56,28 @@ public class TennisGame {
 		}
 	}
 
-	public void firstPlayerScores() {
-		firstPlayerScore++;
-	}
-
-	public void secondPlayerScores() {
-		secondPlayerScore++;
-	}
-
 	public String getFirstPlayerName() {
 		return firstPlayerName;
 	}
 
 	public String getSecondPlayerName() {
 		return secondPlayerName;
+	}
+
+	public int getFirstPlayerScore() {
+		return firstPlayerScore;
+	}
+
+	public void setFirstPlayerScore(int firstPlayerScore) {
+		this.firstPlayerScore = firstPlayerScore;
+	}
+
+	public int getSecondPlayerScore() {
+		return secondPlayerScore;
+	}
+
+	public void setSecondPlayerScore(int secondPlayerScore) {
+		this.secondPlayerScore = secondPlayerScore;
 	}
 
 	private boolean isDeuce() {
@@ -160,17 +168,15 @@ public class TennisGame {
 			logger.info(invalidErrorMessage);
 		} else {
 
-			TennisGame game = new TennisGame(args[0], args[2]);
+			String firstPlayerName = args[0];
+			String secondPlayerName = args[2];
+
+			TennisGame game = new TennisGame(firstPlayerName, secondPlayerName);
 			int firstPlayerScore = Integer.parseInt(args[1]);
 			int secondPlayerScore = Integer.parseInt(args[3]);
 
-			for (int firstPlayerScoreIndex = 0; firstPlayerScoreIndex < firstPlayerScore; firstPlayerScoreIndex++) {
-				game.firstPlayerScores();
-			}
-
-			for (int secondPlayerScoreIndex = 0; secondPlayerScoreIndex < secondPlayerScore; secondPlayerScoreIndex++) {
-				game.secondPlayerScores();
-			}
+			game.setFirstPlayerScore(firstPlayerScore);
+			game.setSecondPlayerScore(secondPlayerScore);
 
 			logger.info(game.getScore());
 		}
