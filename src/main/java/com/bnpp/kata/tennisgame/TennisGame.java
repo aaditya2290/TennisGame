@@ -5,9 +5,6 @@ import java.util.logging.Logger;
 
 public class TennisGame {
 
-	private final static Logger logger = Logger.getLogger(TennisGame.class
-			.getName());
-
 	public enum GameScore {
 		LOVE, FIFTEEN, THIRTY, FORTY, DEUCE;
 	}
@@ -159,28 +156,6 @@ public class TennisGame {
 
 	private boolean isSecondPlayerScoreExceedsFivePoints() {
 		return secondPlayerScore > 5;
-	}
-
-	public static void main(String args[]) {
-
-		String invalidErrorMessage = "Please enter atleast 4 arguments in the below format \n Player1_Name Player1_Score Player2_Name Player2_Score";
-		if (args.length != 4) {
-			logger.info(invalidErrorMessage);
-		} else {
-
-			String firstPlayerName = args[0];
-			String secondPlayerName = args[2];
-
-			TennisGame game = new TennisGame(firstPlayerName, secondPlayerName);
-			int firstPlayerScore = Integer.parseInt(args[1]);
-			int secondPlayerScore = Integer.parseInt(args[3]);
-
-			game.setFirstPlayerScore(firstPlayerScore);
-			game.setSecondPlayerScore(secondPlayerScore);
-
-			logger.info(game.getScore());
-		}
-
 	}
 
 }
