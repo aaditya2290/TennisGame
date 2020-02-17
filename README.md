@@ -25,9 +25,9 @@ To Run Application:
 
 After successful maven build go to \target\classes and execute below command
 
-java -classpath .\ com.bnpp.kata.tennisgame.TennisGame Player1_Name Player1_Score Player2_Name Player2_Score
+java -classpath .\ com.bnpp.kata.tennisgame.TennisGameMain Player1_Name Player1_Score Player2_Name Player2_Score
 
 Here Player1_Name,Player1_Score,Player2_Name,Player2_Score are the four parameters which must be passed.
 
-Eg: java -classpath .\ com.bnpp.kata.tennisgame.TennisGame John 2 Andrew 4
+Eg: java -classpath .\ com.bnpp.kata.tennisgame.TennisGameMain John 2 Andrew 4
 
