@@ -1,17 +1,12 @@
 package com.bnpp.kata.tennisgame;
 
-import java.util.HashMap;
-
 public class TennisGame {
 
-	public enum GameScore {
-		LOVE, FIFTEEN, THIRTY, FORTY, DEUCE;
-	}
-
-	public static final String ALL = " ALL";
-	public static final String ADVANTAGE = "ADVANTAGE ";
-	public static final String WINS = " WINS";
-	public static final String PLAYER_SCORES_ARE_INVALID = "PLAYER SCORES ARE INVALID";
+	public static final String ALL = " All";
+	public static final String DEUCE = "Deuce";
+	public static final String ADVANTAGE = "Advantage ";
+	public static final String WINS = " wins";
+	public static final String PLAYER_POINTS_ARE_INVALID = "Player points are invalid.";
 
 	private Player firstPlayer;
 	private Player secondPlayer;
@@ -23,38 +18,36 @@ public class TennisGame {
 
 	public String getScore() {
 
-		HashMap<Integer, GameScore> scoreLookUp = new HashMap<Integer, GameScore>();
-		scoreLookUp.put(0, GameScore.LOVE);
-		scoreLookUp.put(1, GameScore.FIFTEEN);
-		scoreLookUp.put(2, GameScore.THIRTY);
-		scoreLookUp.put(3, GameScore.FORTY);
+		String tennisGameScore;
 
 		if (isInvalidScores()) {
-			return PLAYER_SCORES_ARE_INVALID;
+			tennisGameScore = PLAYER_POINTS_ARE_INVALID;
 		} else if (isFirstPlayerWins()) {
-			return firstPlayer.getName() + WINS;
+			tennisGameScore = firstPlayer.getName() + WINS;
 		} else if (isSecondPlayerWins()) {
-			return secondPlayer.getName() + WINS;
+			tennisGameScore = secondPlayer.getName() + WINS;
 		} else if (isAdvantageFirstPlayer()) {
-			return ADVANTAGE + firstPlayer.getName();
+			tennisGameScore = ADVANTAGE + firstPlayer.getName();
 		} else if (isAdvantageSecondPlayer()) {
-			return ADVANTAGE + secondPlayer.getName();
-		} else if (isDeuce()) {
-			return GameScore.DEUCE.toString();
-		} else if (firstPlayer.getPoints() != secondPlayer.getPoints()) {
-			return scoreLookUp.get(firstPlayer.getPoints()) + " "
-					+ scoreLookUp.get(secondPlayer.getPoints());
+			tennisGameScore = ADVANTAGE + secondPlayer.getName();
+		} else if (isPlayerScoresEqual()) {
+			tennisGameScore = (isDeuce()) ? DEUCE : PointsToScoreMapper
+					.getScoreFor(firstPlayer.getPoints()) + ALL;
 		} else {
-			return scoreLookUp.get(firstPlayer.getPoints()) + ALL;
+			tennisGameScore = PointsToScoreMapper.getScoreFor(firstPlayer
+					.getPoints())
+					+ " "
+					+ PointsToScoreMapper.getScoreFor(secondPlayer.getPoints());
 		}
-	}
-
-	private boolean isDeuce() {
-		return (isPlayerScoresEqual() && isFirstPlayerScoreExceedsTwoPoints());
+		return tennisGameScore;
 	}
 
 	private boolean isPlayerScoresEqual() {
 		return firstPlayer.getPoints() == secondPlayer.getPoints();
+	}
+
+	private boolean isDeuce() {
+		return (isFirstPlayerScoreExceedsTwoPoints());
 	}
 
 	private boolean isFirstPlayerScoreExceedsTwoPoints() {
