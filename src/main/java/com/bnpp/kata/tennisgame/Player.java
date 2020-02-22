@@ -17,6 +17,10 @@ public class Player {
 		setPoints(points);
 	}
 
+	public String getScore() {
+		return PointsToScoreMapper.getScoreFor(points);
+	}
+
 	public int getPoints() {
 		return points;
 	}

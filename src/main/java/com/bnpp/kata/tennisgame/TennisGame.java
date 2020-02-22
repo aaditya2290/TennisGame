@@ -8,6 +8,11 @@ public class TennisGame {
 	public static final String WINS = " wins";
 	public static final String PLAYER_POINTS_ARE_INVALID = "Player points are invalid.";
 
+	private static final int POINTS_DIFFERENCE_FOR_ADVANTAGE = 1;
+	private static final int POINTS_DIFFERENCE_FOR_WIN = 2;
+	private static final int MINIMUM_POINTS_FOR_DEUCE = 3;
+	private static final int MINIMUM_POINTS_FOR_WIN = 4;
+
 	private Player firstPlayer;
 	private Player secondPlayer;
 
@@ -31,13 +36,11 @@ public class TennisGame {
 		} else if (isAdvantageSecondPlayer()) {
 			tennisGameScore = ADVANTAGE + secondPlayer.getName();
 		} else if (isPlayerScoresEqual()) {
-			tennisGameScore = (isDeuce()) ? DEUCE : PointsToScoreMapper
-					.getScoreFor(firstPlayer.getPoints()) + ALL;
+			tennisGameScore = (isFirstPlayersPointsGreaterThanOrEqualToMinimumPointsForDeuce()) ? DEUCE
+					: firstPlayer.getScore() + ALL;
 		} else {
-			tennisGameScore = PointsToScoreMapper.getScoreFor(firstPlayer
-					.getPoints())
-					+ " "
-					+ PointsToScoreMapper.getScoreFor(secondPlayer.getPoints());
+			tennisGameScore = firstPlayer.getScore() + " "
+					+ secondPlayer.getScore();
 		}
 		return tennisGameScore;
 	}
@@ -46,81 +49,77 @@ public class TennisGame {
 		return firstPlayer.getPoints() == secondPlayer.getPoints();
 	}
 
-	private boolean isDeuce() {
-		return (isFirstPlayerScoreExceedsTwoPoints());
-	}
-
-	private boolean isFirstPlayerScoreExceedsTwoPoints() {
-		return firstPlayer.getPoints() > 2;
+	private boolean isFirstPlayersPointsGreaterThanOrEqualToMinimumPointsForDeuce() {
+		return firstPlayer.getPoints() >= MINIMUM_POINTS_FOR_DEUCE;
 	}
 
 	private boolean isAdvantageFirstPlayer() {
-		return isFirstPlayerLeadsByOnePoint()
-				&& isSecondPlayerScoreExceedsTwoPoints();
+		return isFirstPlayersLeadEqualToPointsDifferenceForDeuce()
+				&& isSecondPlayersPointsGreaterThanOrEqualToMinimumPointsForDeuce();
 	}
 
-	private boolean isFirstPlayerLeadsByOnePoint() {
-		return firstPlayer.getPoints() - secondPlayer.getPoints() == 1;
+	private boolean isFirstPlayersLeadEqualToPointsDifferenceForDeuce() {
+		return firstPlayer.getPoints() - secondPlayer.getPoints() == POINTS_DIFFERENCE_FOR_ADVANTAGE;
 	}
 
-	private boolean isSecondPlayerScoreExceedsTwoPoints() {
-		return secondPlayer.getPoints() > 2;
+	private boolean isSecondPlayersPointsGreaterThanOrEqualToMinimumPointsForDeuce() {
+		return secondPlayer.getPoints() >= MINIMUM_POINTS_FOR_DEUCE;
 	}
 
 	private boolean isAdvantageSecondPlayer() {
-		return isSecondPlayerLeadsByOnePoint()
-				&& isFirstPlayerScoreExceedsTwoPoints();
+		return isSecondPlayersLeadEqualToPointsDifferenceForAdvantage()
+				&& isFirstPlayersPointsGreaterThanOrEqualToMinimumPointsForDeuce();
 	}
 
-	private boolean isSecondPlayerLeadsByOnePoint() {
-		return secondPlayer.getPoints() - firstPlayer.getPoints() == 1;
+	private boolean isSecondPlayersLeadEqualToPointsDifferenceForAdvantage() {
+		return secondPlayer.getPoints() - firstPlayer.getPoints() == POINTS_DIFFERENCE_FOR_ADVANTAGE;
 	}
 
 	private boolean isFirstPlayerWins() {
-		return isFirstPlayerLeadsByTwoOrMorePoints()
-				&& isFirstPlayerScoreExceedsThreePoints();
+		return isFirstPlayersLeadGreaterThanOrEqualToPointsDifferenceForWin()
+				&& isFirstPlayersPointsGreaterThanOrEqualToMinimumPointsForWin();
 	}
 
-	private boolean isFirstPlayerLeadsByTwoOrMorePoints() {
-		return firstPlayer.getPoints() - secondPlayer.getPoints() >= 2;
+	private boolean isFirstPlayersLeadGreaterThanOrEqualToPointsDifferenceForWin() {
+		return firstPlayer.getPoints() - secondPlayer.getPoints() >= POINTS_DIFFERENCE_FOR_WIN;
 	}
 
-	private boolean isFirstPlayerScoreExceedsThreePoints() {
-		return firstPlayer.getPoints() > 3;
+	private boolean isFirstPlayersPointsGreaterThanOrEqualToMinimumPointsForWin() {
+		return firstPlayer.getPoints() >= MINIMUM_POINTS_FOR_WIN;
 	}
 
 	private boolean isSecondPlayerWins() {
-		return isSecondPlayerLeadsByTwoOrMorePoints()
-				&& isSecondPlayerScoreExceedsThreePoints();
+		return isSecondPlayersLeadGreaterThanOrEqualToPointsDifferenceForWin()
+				&& isSecondPlayersPointsGreaterThanOrEqualToMinimumPointsForWin();
 	}
 
-	private boolean isSecondPlayerScoreExceedsThreePoints() {
-		return secondPlayer.getPoints() > 3;
+	private boolean isSecondPlayersPointsGreaterThanOrEqualToMinimumPointsForWin() {
+		return secondPlayer.getPoints() >= MINIMUM_POINTS_FOR_WIN;
 	}
 
-	private boolean isSecondPlayerLeadsByTwoOrMorePoints() {
-		return secondPlayer.getPoints() - firstPlayer.getPoints() >= 2;
+	private boolean isSecondPlayersLeadGreaterThanOrEqualToPointsDifferenceForWin() {
+		return secondPlayer.getPoints() - firstPlayer.getPoints() >= POINTS_DIFFERENCE_FOR_WIN;
 	}
 
 	private boolean isInvalidScores() {
-		return (isFirstPlayerLeadsByMoreThanTwoPoints() && isFirstPlayerScoreExceedsFivePoints())
-				|| (isSecondPlayerLeadsByMoreThanTwoPoints() && isSecondPlayerScoreExceedsFivePoints());
+		return (isFirstPlayersLeadGreaterThanPointsDifferenceForWin() && isFirstPlayersPointsGreaterThanMinimumPointsForWin())
+				|| (isSecondPlayersLeadGreaterThanPointsDifferenceForWin() && isSecondPlayersPointsGreaterThanMinimumPointsForWin());
 	}
 
-	private boolean isFirstPlayerLeadsByMoreThanTwoPoints() {
-		return firstPlayer.getPoints() - secondPlayer.getPoints() > 2;
+	private boolean isFirstPlayersLeadGreaterThanPointsDifferenceForWin() {
+		return firstPlayer.getPoints() - secondPlayer.getPoints() > POINTS_DIFFERENCE_FOR_WIN;
 	}
 
-	private boolean isFirstPlayerScoreExceedsFivePoints() {
-		return firstPlayer.getPoints() > 5;
+	private boolean isFirstPlayersPointsGreaterThanMinimumPointsForWin() {
+		return firstPlayer.getPoints() > MINIMUM_POINTS_FOR_WIN;
 	}
 
-	private boolean isSecondPlayerLeadsByMoreThanTwoPoints() {
+	private boolean isSecondPlayersLeadGreaterThanPointsDifferenceForWin() {
 		return secondPlayer.getPoints() - firstPlayer.getPoints() > 2;
 	}
 
-	private boolean isSecondPlayerScoreExceedsFivePoints() {
-		return secondPlayer.getPoints() > 5;
+	private boolean isSecondPlayersPointsGreaterThanMinimumPointsForWin() {
+		return secondPlayer.getPoints() > MINIMUM_POINTS_FOR_WIN;
 	}
 
 }
