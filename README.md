@@ -84,9 +84,11 @@ Navigate to this path in command prompt and execute the below comand
 ```bash
 java -jar tennis-game-tdd-0.0.1-SNAPSHOT.jar FirstPlayerName FirstPlayerScore SecondPlayerName SecondPlayerScore
 ```
+Here FirstPlayerName,FirstPlayerScore,SecondPlayerName,SecondPlayerScore are the four parameters which must be passed.
+
 Eg:
 ```bash
-java -jar tennis-game-tdd-0.0.1-SNAPSHOT.jar FirstPlayerName FirstPlayer1Score SecondPlayerName SecondPlayerScore
+java -jar tennis-game-tdd-0.0.1-SNAPSHOT.jar John 2 Andrew 4
 ```
 The scorecard for the tennis game will be displayed.
 
