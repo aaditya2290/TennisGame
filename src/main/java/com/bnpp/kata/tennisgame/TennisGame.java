@@ -2,11 +2,11 @@ package com.bnpp.kata.tennisgame;
 
 public class TennisGame {
 
-	public static final String ALL = " All";
-	public static final String DEUCE = "Deuce";
-	public static final String ADVANTAGE = "Advantage ";
-	public static final String WINS = " wins";
-	public static final String PLAYER_POINTS_ARE_INVALID = "Player points are invalid.";
+	private static final String ALL = " All";
+	private static final String DEUCE = "Deuce";
+	private static final String ADVANTAGE = "Advantage ";
+	private static final String WINS = " wins";
+	private static final String PLAYER_POINTS_ARE_INVALID = "Player points are invalid.";
 
 	private static final int POINTS_DIFFERENCE_FOR_ADVANTAGE = 1;
 	private static final int POINTS_DIFFERENCE_FOR_WIN = 2;
@@ -27,14 +27,14 @@ public class TennisGame {
 
 		if (isInvalidScores()) {
 			tennisGameScore = PLAYER_POINTS_ARE_INVALID;
-		} else if (isFirstPlayerWins()) {
-			tennisGameScore = firstPlayer.getName() + WINS;
-		} else if (isSecondPlayerWins()) {
-			tennisGameScore = secondPlayer.getName() + WINS;
-		} else if (isAdvantageFirstPlayer()) {
-			tennisGameScore = ADVANTAGE + firstPlayer.getName();
-		} else if (isAdvantageSecondPlayer()) {
-			tennisGameScore = ADVANTAGE + secondPlayer.getName();
+		} else if (isWin()) {
+			String winningPlayerName = firstPlayer.isWinner() ? firstPlayer
+					.getName() : secondPlayer.getName();
+			tennisGameScore = winningPlayerName + WINS;
+		} else if (isAdvantage()) {
+			String advantagePlayerName = firstPlayer.isHasAdvantage() ? firstPlayer
+					.getName() : secondPlayer.getName();
+			tennisGameScore = ADVANTAGE + advantagePlayerName;
 		} else if (isPlayerScoresEqual()) {
 			tennisGameScore = (isFirstPlayersPointsGreaterThanOrEqualToMinimumPointsForDeuce()) ? DEUCE
 					: firstPlayer.getScore() + ALL;
@@ -43,6 +43,14 @@ public class TennisGame {
 					+ secondPlayer.getScore();
 		}
 		return tennisGameScore;
+	}
+
+	public boolean isWin() {
+		return isFirstPlayerWins() || isSecondPlayerWins();
+	}
+
+	public boolean isAdvantage() {
+		return isAdvantageFirstPlayer() || isAdvantageSecondPlayer();
 	}
 
 	private boolean isPlayerScoresEqual() {
@@ -54,8 +62,10 @@ public class TennisGame {
 	}
 
 	private boolean isAdvantageFirstPlayer() {
-		return isFirstPlayersLeadEqualToPointsDifferenceForDeuce()
+		boolean isAdvantage = isFirstPlayersLeadEqualToPointsDifferenceForDeuce()
 				&& isSecondPlayersPointsGreaterThanOrEqualToMinimumPointsForDeuce();
+		firstPlayer.setHasAdvantage(isAdvantage);
+		return isAdvantage;
 	}
 
 	private boolean isFirstPlayersLeadEqualToPointsDifferenceForDeuce() {
@@ -67,8 +77,10 @@ public class TennisGame {
 	}
 
 	private boolean isAdvantageSecondPlayer() {
-		return isSecondPlayersLeadEqualToPointsDifferenceForAdvantage()
+		boolean isAdvantage = isSecondPlayersLeadEqualToPointsDifferenceForAdvantage()
 				&& isFirstPlayersPointsGreaterThanOrEqualToMinimumPointsForDeuce();
+		secondPlayer.setHasAdvantage(isAdvantage);
+		return isAdvantage;
 	}
 
 	private boolean isSecondPlayersLeadEqualToPointsDifferenceForAdvantage() {
@@ -76,8 +88,10 @@ public class TennisGame {
 	}
 
 	private boolean isFirstPlayerWins() {
-		return isFirstPlayersLeadGreaterThanOrEqualToPointsDifferenceForWin()
+		boolean isWin = isFirstPlayersLeadGreaterThanOrEqualToPointsDifferenceForWin()
 				&& isFirstPlayersPointsGreaterThanOrEqualToMinimumPointsForWin();
+		firstPlayer.setWinner(isWin);
+		return isWin;
 	}
 
 	private boolean isFirstPlayersLeadGreaterThanOrEqualToPointsDifferenceForWin() {
@@ -89,8 +103,10 @@ public class TennisGame {
 	}
 
 	private boolean isSecondPlayerWins() {
-		return isSecondPlayersLeadGreaterThanOrEqualToPointsDifferenceForWin()
+		boolean isWin = isSecondPlayersLeadGreaterThanOrEqualToPointsDifferenceForWin()
 				&& isSecondPlayersPointsGreaterThanOrEqualToMinimumPointsForWin();
+		secondPlayer.setWinner(isWin);
+		return isWin;
 	}
 
 	private boolean isSecondPlayersPointsGreaterThanOrEqualToMinimumPointsForWin() {

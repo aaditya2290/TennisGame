@@ -7,15 +7,15 @@ import org.junit.Test;
 
 public class TennisGameTest {
 
-	public static final String ALL = " All";
-	public static final String DEUCE = "Deuce";
-	public static final String ADVANTAGE = "Advantage ";
-	public static final String WINS = " wins";
-	public static final String PLAYER_POINTS_ARE_INVALID = "Player points are invalid.";
-	public static final String LOVE = "Love";
-	public static final String FIFTEEN = "Fifteen";
-	public static final String THIRTY = "Thirty";
-	public static final String FORTY = "Forty";
+	private static final String ALL = " All";
+	private static final String DEUCE = "Deuce";
+	private static final String ADVANTAGE = "Advantage ";
+	private static final String WINS = " wins";
+	private static final String PLAYER_POINTS_ARE_INVALID = "Player points are invalid.";
+	private static final String LOVE = "Love";
+	private static final String FIFTEEN = "Fifteen";
+	private static final String THIRTY = "Thirty";
+	private static final String FORTY = "Forty";
 
 	private TennisGame tennisGame;
 	private Player firstPlayer;
@@ -77,6 +77,13 @@ public class TennisGameTest {
 	}
 
 	@Test
+	public void scoreShouldBeDeuceIfBothPlayerWinThreePoints() {
+		firstPlayer.scores(3);
+		secondPlayer.scores(3);
+		assertEquals(DEUCE, tennisGame.getScore());
+	}
+
+	@Test
 	public void scoreShouldBeAdvantageFirstPlayerIfFirstPlayerWins4PointsAndSecondPlayerWins3Points() {
 		firstPlayer.scores(4);
 		secondPlayer.scores(3);
@@ -108,13 +115,6 @@ public class TennisGameTest {
 	public void scoreShouldBePlayerScoresAreInvalidIfFirstPlayerWins10PointsAndSecondPlayerWins2Points() {
 		firstPlayer.scores(10);
 		secondPlayer.scores(2);
-		assertEquals(PLAYER_POINTS_ARE_INVALID, tennisGame.getScore());
-	}
-
-	@Test
-	public void scoreShouldBePlayerScoresAreInvalidIfFirstPlayerWins2PointsAndSecondPlayerWins12Points() {
-		firstPlayer.scores(2);
-		secondPlayer.scores(12);
 		assertEquals(PLAYER_POINTS_ARE_INVALID, tennisGame.getScore());
 	}
 
