@@ -1,7 +1,6 @@
 package com.bnpp.kata.tennisgame;
 
 import java.util.HashMap;
-import java.util.logging.Logger;
 
 public class TennisGame {
 
@@ -14,15 +13,12 @@ public class TennisGame {
 	public static final String WINS = " WINS";
 	public static final String PLAYER_SCORES_ARE_INVALID = "PLAYER SCORES ARE INVALID";
 
-	private int firstPlayerScore;
-	private int secondPlayerScore;
-	private String firstPlayerName;
-	private String secondPlayerName;
+	private Player firstPlayer;
+	private Player secondPlayer;
 
-	public TennisGame(String firstPlayerName, String secondPlayerName) {
-		super();
-		this.firstPlayerName = firstPlayerName;
-		this.secondPlayerName = secondPlayerName;
+	public TennisGame(Player firstPlayer, Player secondPlayer) {
+		this.firstPlayer = firstPlayer;
+		this.secondPlayer = secondPlayer;
 	}
 
 	public String getScore() {
@@ -36,45 +32,21 @@ public class TennisGame {
 		if (isInvalidScores()) {
 			return PLAYER_SCORES_ARE_INVALID;
 		} else if (isFirstPlayerWins()) {
-			return this.getFirstPlayerName() + WINS;
+			return firstPlayer.getName() + WINS;
 		} else if (isSecondPlayerWins()) {
-			return this.getSecondPlayerName() + WINS;
+			return secondPlayer.getName() + WINS;
 		} else if (isAdvantageFirstPlayer()) {
-			return ADVANTAGE + this.getFirstPlayerName();
+			return ADVANTAGE + firstPlayer.getName();
 		} else if (isAdvantageSecondPlayer()) {
-			return ADVANTAGE + this.getSecondPlayerName();
+			return ADVANTAGE + secondPlayer.getName();
 		} else if (isDeuce()) {
 			return GameScore.DEUCE.toString();
-		} else if (firstPlayerScore != secondPlayerScore) {
-			return scoreLookUp.get(firstPlayerScore) + " "
-					+ scoreLookUp.get(secondPlayerScore);
+		} else if (firstPlayer.getPoints() != secondPlayer.getPoints()) {
+			return scoreLookUp.get(firstPlayer.getPoints()) + " "
+					+ scoreLookUp.get(secondPlayer.getPoints());
 		} else {
-			return scoreLookUp.get(firstPlayerScore) + ALL;
+			return scoreLookUp.get(firstPlayer.getPoints()) + ALL;
 		}
-	}
-
-	public String getFirstPlayerName() {
-		return firstPlayerName;
-	}
-
-	public String getSecondPlayerName() {
-		return secondPlayerName;
-	}
-
-	public int getFirstPlayerScore() {
-		return firstPlayerScore;
-	}
-
-	public void setFirstPlayerScore(int firstPlayerScore) {
-		this.firstPlayerScore = firstPlayerScore;
-	}
-
-	public int getSecondPlayerScore() {
-		return secondPlayerScore;
-	}
-
-	public void setSecondPlayerScore(int secondPlayerScore) {
-		this.secondPlayerScore = secondPlayerScore;
 	}
 
 	private boolean isDeuce() {
@@ -82,11 +54,11 @@ public class TennisGame {
 	}
 
 	private boolean isPlayerScoresEqual() {
-		return firstPlayerScore == secondPlayerScore;
+		return firstPlayer.getPoints() == secondPlayer.getPoints();
 	}
 
 	private boolean isFirstPlayerScoreExceedsTwoPoints() {
-		return firstPlayerScore > 2;
+		return firstPlayer.getPoints() > 2;
 	}
 
 	private boolean isAdvantageFirstPlayer() {
@@ -95,11 +67,11 @@ public class TennisGame {
 	}
 
 	private boolean isFirstPlayerLeadsByOnePoint() {
-		return firstPlayerScore - secondPlayerScore == 1;
+		return firstPlayer.getPoints() - secondPlayer.getPoints() == 1;
 	}
 
 	private boolean isSecondPlayerScoreExceedsTwoPoints() {
-		return secondPlayerScore > 2;
+		return secondPlayer.getPoints() > 2;
 	}
 
 	private boolean isAdvantageSecondPlayer() {
@@ -108,7 +80,7 @@ public class TennisGame {
 	}
 
 	private boolean isSecondPlayerLeadsByOnePoint() {
-		return secondPlayerScore - firstPlayerScore == 1;
+		return secondPlayer.getPoints() - firstPlayer.getPoints() == 1;
 	}
 
 	private boolean isFirstPlayerWins() {
@@ -117,11 +89,11 @@ public class TennisGame {
 	}
 
 	private boolean isFirstPlayerLeadsByTwoOrMorePoints() {
-		return firstPlayerScore - secondPlayerScore >= 2;
+		return firstPlayer.getPoints() - secondPlayer.getPoints() >= 2;
 	}
 
 	private boolean isFirstPlayerScoreExceedsThreePoints() {
-		return firstPlayerScore > 3;
+		return firstPlayer.getPoints() > 3;
 	}
 
 	private boolean isSecondPlayerWins() {
@@ -130,11 +102,11 @@ public class TennisGame {
 	}
 
 	private boolean isSecondPlayerScoreExceedsThreePoints() {
-		return secondPlayerScore > 3;
+		return secondPlayer.getPoints() > 3;
 	}
 
 	private boolean isSecondPlayerLeadsByTwoOrMorePoints() {
-		return secondPlayerScore - firstPlayerScore >= 2;
+		return secondPlayer.getPoints() - firstPlayer.getPoints() >= 2;
 	}
 
 	private boolean isInvalidScores() {
@@ -143,19 +115,19 @@ public class TennisGame {
 	}
 
 	private boolean isFirstPlayerLeadsByMoreThanTwoPoints() {
-		return firstPlayerScore - secondPlayerScore > 2;
+		return firstPlayer.getPoints() - secondPlayer.getPoints() > 2;
 	}
 
 	private boolean isFirstPlayerScoreExceedsFivePoints() {
-		return firstPlayerScore > 5;
+		return firstPlayer.getPoints() > 5;
 	}
 
 	private boolean isSecondPlayerLeadsByMoreThanTwoPoints() {
-		return secondPlayerScore - firstPlayerScore > 2;
+		return secondPlayer.getPoints() - firstPlayer.getPoints() > 2;
 	}
 
 	private boolean isSecondPlayerScoreExceedsFivePoints() {
-		return secondPlayerScore > 5;
+		return secondPlayer.getPoints() > 5;
 	}
 
 }

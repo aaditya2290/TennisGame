@@ -9,17 +9,20 @@ public class TennisGameMain {
 
 	public static void main(String args[]) {
 
-		String invalidErrorMessage = "Please enter atleast 4 arguments in the below format \n Player1_Name Player1_Score Player2_Name Player2_Score";
+		String invalidErrorMessage = "Please enter atleast 4 arguments in the format given below: \n FirstPlayerName FirstPlayerScore SecondPlayerName SecondPlayerScore";
 		if (args.length != 4) {
 			logger.info(invalidErrorMessage);
 		} else {
-			TennisGame game = new TennisGame(args[0], args[2]);
+			Player firstPlayer = new Player(args[0]);
+			Player secondPlayer = new Player(args[2]);
 
-			int firstPlayerScore = Integer.parseInt(args[1]);
-			int secondPlayerScore = Integer.parseInt(args[3]);
+			TennisGame game = new TennisGame(firstPlayer, secondPlayer);
 
-			game.setFirstPlayerScore(firstPlayerScore);
-			game.setSecondPlayerScore(secondPlayerScore);
+			int firstPlayerPoints = Integer.parseInt(args[1]);
+			int secondPlayerPoints = Integer.parseInt(args[3]);
+
+			firstPlayer.scores(firstPlayerPoints);
+			secondPlayer.scores(secondPlayerPoints);
 
 			logger.info(game.getScore());
 		}
