@@ -5,8 +5,8 @@ import java.util.logging.Logger;
 public class TennisGameRunner {
 
 	private static final String INVALID_ARGUMENTS_ERROR = "Please enter atleast 4 command line arguments in the format given below: \n FirstPlayerName FirstPlayerScore SecondPlayerName SecondPlayerScore";
-	private final static Logger logger = Logger.getLogger(TennisGame.class
-			.getName());
+	private final static Logger logger = Logger
+			.getLogger(TennisGameRunner.class.getName());
 
 	public static void main(String args[]) {
 
